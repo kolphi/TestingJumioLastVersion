@@ -4,10 +4,10 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 buildscript {
     ext {
-        buildToolsVersion = "32.0.0"
+        buildToolsVersion = "33.0.0"
         minSdkVersion = 21
-        compileSdkVersion = 31
-        targetSdkVersion = 31
+        compileSdkVersion = 33
+        targetSdkVersion = 33
 
         if (System.properties['os.arch'] == "aarch64") {
             // For M1 Users we need to use the NDK 24 which added support for aarch64
@@ -20,9 +20,11 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
+        maven {url 'https://repo.mobile.jumio.ai'}
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.2.0")
+        classpath("com.android.tools.build:gradle:7.3.0")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("de.undercouch:gradle-download-task:4.1.2")
         // NOTE: Do not place your application dependencies here; they belong
@@ -49,16 +51,8 @@ allprojects {
         }
         google()
         maven { url 'https://www.jitpack.io' }
-        exclusiveContent {
-          forRepository {
             maven {
               url 'https://repo.mobile.jumio.ai'
             }
-          }
-          filter {
-            includeGroup "com.jumio.android"
-            includeGroup "com.iproov.sdk"
-          }
-        }
     }
 }
